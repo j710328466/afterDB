@@ -27,9 +27,9 @@ baseSchema.methods.createData = function (data) {
     })
 }
 
-baseSchema.methods.checkData = function (data = {}, fields = null, options = {}) {
+baseSchema.methods.checkData = function (data) {
     return new Promise((resolve, reject) => {
-        BaseModel.find(data, fields, options, (error, doc) => {
+        BaseModel.find(data, (error, doc) => {
             if (error) {
                 reject(error)
             } else {
