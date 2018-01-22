@@ -1,18 +1,23 @@
-var mongoose = require('mongoose')
-var mongo = require('../lib/mongo')
+const mongoose = require('mongoose')
+const mongo = require('../lib/mongo')
 
 // 定义数据库实例
-var UserSchema = new mongoose.Schema({
-    username: { type: String },
-    password: { type: String },
-    age: { type: Number },
-    discription: { type: String},
-    time: { type: Date, default: Date.now }
+var Users = new mongoose.Schema({
+    name: String,
+    pwd: String,
+    sex: String,
+    idCard: String,
+    tel: Number
 })
 
-UserSchema.methods.createData = function (data) {
+/**
+ * 添加数据
+ * @param  {[type]} data 需要保存的数据对象
+ */
+
+Users.methods.createData = function (data) {
     return new Promise((resolve, reject) => {
-        UserModel.create(data, (error, doc) => {
+        UsersModel.create(data, (error, doc) => {
             if (error) {
                 reject(error)
             } else {
@@ -22,9 +27,9 @@ UserSchema.methods.createData = function (data) {
     })
 }
 
-UserSchema.methods.checkData = function (data = {}, fields = null, options = {}) {
+Users.methods.checkData = function (data) {
     return new Promise((resolve, reject) => {
-        UserModel.find(data, fields, options, (error, doc) => {
+        UsersModel.find(data, (error, doc) => {
             if (error) {
                 reject(error)
             } else {
@@ -34,6 +39,19 @@ UserSchema.methods.checkData = function (data = {}, fields = null, options = {})
     })
 }
 
-var UserModel = mongo.model('user', UserSchema,'user' )
-var User = new UserModel()
-module.exports = UserModel
+Users.methods.findOnly = function (data) {
+    return new Promise((resolve, reject) => {
+        UsersModel.findOne(data, (error, doc) => {
+            if (error) {
+                reject(error)
+            } else {
+                resolve(doc)
+            }
+        })
+    })
+}
+
+var UsersModel = mongo.model('users', Users, 'users')
+var users = new UsersModel()
+
+module.exports = users
