@@ -1,6 +1,7 @@
 var router = require('express').Router()
 var querystring = require('querystring')    // 表单提交字符串解析
 var base = require('../DB/index')
+var oss = require('../lib/oss')
 
 // 登录
 router.post('/login', function (req, res, next) {
