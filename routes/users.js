@@ -1,9 +1,11 @@
 var router = require('express').Router()
 var querystring = require('querystring')    // 表单提交字符串解析
 var user = require('../DB/users')
+var oss = require('../lib/oss')
 
 // 登录
 router.post('/login', function (req, res, next) {
+    console.log(req.body)
     user.findOnly(req.body)
         .then(result => {
             console.log(result)

@@ -4,18 +4,23 @@ var base = require('../DB/index')
 var oss = require('../lib/oss')
 
 // 登录
-router.post('/login', function (req, res, next) {
-    base.findOnly(req.body)
-        .then(result => {
-            console.log(result)
-            if (result == null) {
-                console.log('登录失败')
-                res.end('登录失败');
-            } else {
-                console.log('登录成功')
-                res.end(result._id.toString());
-            }
-        })
+router.post('/uploadFile', function (req, res, next) {
+    req.on('data', function(chunk){
+        // chunks.push(chunk);
+        // size = chunk.length;
+        console.log(chunk);
+    })
+    // base.findOnly(req.body)
+    //     .then(result => {
+    //         console.log(result)
+    //         if (result == null) {
+    //             console.log('登录失败')
+    //             res.end('登录失败');
+    //         } else {
+    //             console.log('登录成功')
+    //             res.end(result._id.toString());
+    //         }
+    //     })
 })
 
 // 注册
